@@ -1,22 +1,31 @@
 <template>
-  <div class="text" id="text" @mousedown.prevent="moveText" @dblclick="editText">
+  <div class="text" :id="'text' + index" @mousedown.prevent="moveText" @dblclick="editText" @contextmenu.prevent="showColorPicker">
     <slot></slot>
+    <v-menu v-model="showPicker" :close-on-content-click="false" offset-y>
+      <v-color-picker v-model="currentColor" @input="changeColor"/>
+      <template v-slot:activator="{ on }">
+        <div v-on="on"></div>
+      </template>
+    </v-menu>
   </div>
 </template>
 
 <script>
 export default {
   name: 'TextField',
+  props: ['index'],
   data() {
     return {
       isEditingText: false,
       originalText: 'Write here...',
-      rotation: 0
+      rotation: 0,
+      currentColor: 'red',
+      showPicker: false
     }
   },
   methods: {
     moveText(event){
-      let textElement = document.getElementById('text')
+      let textElement = document.getElementById('text' + this.index)
       if (textElement) {
         event.stopPropagation();
         const moveListener = function(e){
@@ -36,7 +45,7 @@ export default {
     },
     editText(){
       this.isEditingText = true;
-      const textElement = document.getElementById('text');
+      const textElement = document.getElementById('text' + this.index);
       if (textElement) {
         textElement.contentEditable = "true";
         textElement.focus();
@@ -50,6 +59,17 @@ export default {
     rotateText(event) {
       this.rotation += event.deltaY > 0 ? 5 : -5
       event.target.style.transform = `rotate(${this.rotation}deg)`
+    },
+    showColorPicker(event){
+      event.preventDefault()
+      this.showPicker = true
+    },
+    changeColor(color){
+      this.currentColor = color
+      const textElement = document.getElementById('text' + this.index)
+      if (textElement){
+        textElement.style.color = color
+      }
     }
   }
 }

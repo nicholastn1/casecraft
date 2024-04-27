@@ -4,10 +4,12 @@
       <div class="justify-center">
         <v-color-picker v-model="selectedColor"/>
       </div>
-      <v-btn class="mt-10">Add Text</v-btn>
+      <v-btn class="mt-10" @click="addTextField">Add Text</v-btn>
     </v-col>
     <v-col class="d-flex justify-center" cols="12" sm="8" md="5">
-      <TextField>Write here...</TextField>
+      <div v-for="(field, index) in textFields" :key="index">
+        <TextField :index="index">{{ field.text }}</TextField>
+      </div>
       <ImageUpload v-model="image" :selectedColor="selectedColor"/>
     </v-col>
   </v-row>
@@ -25,7 +27,15 @@ export default {
   data() {
     return {
       image: undefined,
-      selectedColor: '#ffffff'
+      selectedColor: '#ffffff',
+      textFields: [
+        { text: 'Write here...', color: 'red' }
+      ]
+    }
+  },
+  methods: {
+    addTextField() {
+      this.textFields.push({ text: 'Write here...', color: 'red' })
     }
   }
 }
