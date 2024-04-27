@@ -6,6 +6,11 @@
       <template v-slot:activator="{ on }">
         <div v-on="on"></div>
       </template>
+      <v-list>
+        <v-list-item v-for="(font, i) in fonts" :key="i" @click="changeFontStyle(font)">
+          <v-list-item-title>{{ font }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
     </v-menu>
   </div>
 </template>
@@ -20,7 +25,10 @@ export default {
       originalText: 'Write here...',
       rotation: 0,
       currentColor: 'red',
-      showPicker: false
+      showPicker: false,
+      showFontPicker: false,
+      fonts: ['Arial', 'Bungee', 'Bungee Spice', 'Honk', 'Shantell Sans', 'Jersey 25', 'Fira Code'],
+      currentFont: 'Arial'
     }
   },
   methods: {
@@ -70,12 +78,20 @@ export default {
       if (textElement){
         textElement.style.color = color
       }
+    },
+    changeFontStyle(font){
+      this.currentFont = font
+      const textElement = document.getElementById('text' + this.index)
+      if (textElement){
+        textElement.style.fontFamily = font
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Spice&family=Fira+Code:wght@300..700&family=Honk&family=Jersey+25&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 .text {
   position: absolute;
   z-index: 1;
