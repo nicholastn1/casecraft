@@ -1,8 +1,9 @@
 <template>
-  <div class="text" :id="'text' + index" @mousedown.prevent="moveText" @dblclick="editText" @contextmenu.prevent="showColorPicker">
+  <div class="text" :id="'text' + index" @mousedown.prevent="moveText" @dblclick="editText" @contextmenu.prevent="showColorPicker" :style="{ fontSize: fontSize + 'px' }">
     <slot></slot>
     <v-menu v-model="showPicker" :close-on-content-click="false" offset-y>
       <v-color-picker v-model="currentColor" @input="changeColor"/>
+      <v-slider style="background-color: #1E1E1E;" v-model="fontSize" min="10" max="30" step="1"></v-slider>
       <template v-slot:activator="{ on }">
         <div v-on="on"></div>
       </template>
@@ -28,7 +29,8 @@ export default {
       showPicker: false,
       showFontPicker: false,
       fonts: ['Arial', 'Bungee', 'Bungee Spice', 'Honk', 'Shantell Sans', 'Jersey 25', 'Fira Code'],
-      currentFont: 'Arial'
+      currentFont: 'Arial',
+      fontSize: 14
     }
   },
   methods: {
