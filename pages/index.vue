@@ -6,10 +6,12 @@
           <v-card-title>Welcome to the Case Craft </v-card-title>
           <v-card-subtitle>
             <p>
-              This is a simple application that allows you to customize your own case.
+              This is a simple application that allows you to customize your own
+              case.
             </p>
             <p>
-              You can choose the color, the image and the font size of your case.
+              You can choose the color, the image and the font size of your
+              case.
             </p>
           </v-card-subtitle>
           <v-card-text>
@@ -23,6 +25,6 @@
 
 <script>
 export default {
-  name: 'IndexPage'
-}
+  name: "IndexPage",
+};
 </script>
