@@ -31,14 +31,13 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
     </v-app-bar>
-    <v-main>
-      <v-container>
-        <Nuxt />
-      </v-container>
+    <v-main style="height: 90vh; box-sizing: border-box;">
+      <Nuxt />
     </v-main>
     <v-footer
       :absolute="!fixed"
       app
+      style="height: 5vh;"
     >
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
