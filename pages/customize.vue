@@ -6,8 +6,9 @@
         <v-color-picker v-model="selectedColor" />
       </div>
       <v-btn class="mt-10" @click="addTextField">Add Text</v-btn>
+      <v-btn class="mt-10" @click="downloadElement">Download</v-btn>
     </v-col>
-    <v-col class="d-flex justify-center" cols="12" sm="8" md="5">
+    <v-col ref="downloadableElement" class="d-flex justify-center" cols="12" sm="8" md="5">
       <div v-for="(field, index) in textFields" :key="index">
         <TextField :index="index">{{ field.text }}</TextField>
       </div>
@@ -32,6 +33,7 @@ import pvSticker from '~/assets/images/positive-vibes.png';
 import saturnSticker from '~/assets/images/saturn.png';
 import successSticker from '~/assets/images/success.png';
 import workSticker from '~/assets/images/work.png';
+import html2canvas from 'html2canvas';
 
 export default {
   name: "CustomizePage",
@@ -64,6 +66,15 @@ export default {
     },
     addSticker(sticker) {
       this.addedStickers.push(sticker);
+    },
+    downloadElement() {
+      const element = this.$refs.downloadableElement; // Make sure to add a ref="downloadableElement" to the v-col
+      html2canvas(element).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'filename.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      });
     }
   },
 };
