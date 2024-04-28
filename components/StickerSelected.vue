@@ -45,7 +45,6 @@ export default {
 .sticker {
   position: absolute;
   z-index: 1;
-  /* cursor: pointer; */
 }
 
 .sticker img {

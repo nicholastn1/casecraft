@@ -25,15 +25,15 @@ import ImageUpload from "~/components/ImageUpload.vue";
 import TextField from "~/components/TextField.vue";
 import StickerPicker from "~/components/StickerPicker.vue";
 import StickerSelected from "~/components/StickerSelected.vue";
-import coffeeSticker from '~/assets/images/coffee.png';
-import fireSticker from '~/assets/images/fire.png';
-import motivationSticker from '~/assets/images/motivation.png';
-import omgSticker from '~/assets/images/omg.png';
-import pvSticker from '~/assets/images/positive-vibes.png';
-import saturnSticker from '~/assets/images/saturn.png';
-import successSticker from '~/assets/images/success.png';
-import workSticker from '~/assets/images/work.png';
-import html2canvas from 'html2canvas';
+import coffeeSticker from "~/assets/images/coffee.png";
+import fireSticker from "~/assets/images/fire.png";
+import motivationSticker from "~/assets/images/motivation.png";
+import omgSticker from "~/assets/images/omg.png";
+import pvSticker from "~/assets/images/positive-vibes.png";
+import saturnSticker from "~/assets/images/saturn.png";
+import successSticker from "~/assets/images/success.png";
+import workSticker from "~/assets/images/work.png";
+import html2canvas from "html2canvas";
 
 export default {
   name: "CustomizePage",
@@ -48,16 +48,16 @@ export default {
       selectedColor: "#FF0000",
       textFields: [{ text: "Write here...", color: "white" }],
       stickers: [
-        { url: coffeeSticker, alt: 'coffee' },
-        { url: fireSticker, alt: 'fire' },
-        { url: motivationSticker, alt: 'motivation' },
-        { url: omgSticker, alt: 'omg' },
-        { url: pvSticker, alt: 'positive vibes' },
-        { url: saturnSticker, alt: 'saturn' },
-        { url: successSticker, alt: 'success' },
-        { url: workSticker, alt: 'work' }
+        { url: coffeeSticker, alt: "coffee" },
+        { url: fireSticker, alt: "fire" },
+        { url: motivationSticker, alt: "motivation" },
+        { url: omgSticker, alt: "omg" },
+        { url: pvSticker, alt: "positive vibes" },
+        { url: saturnSticker, alt: "saturn" },
+        { url: successSticker, alt: "success" },
+        { url: workSticker, alt: "work" },
       ],
-      addedStickers: []
+      addedStickers: [],
     };
   },
   methods: {
@@ -69,13 +69,13 @@ export default {
     },
     downloadElement() {
       const element = this.$refs.downloadableElement; // Make sure to add a ref="downloadableElement" to the v-col
-      html2canvas(element).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'filename.png';
+      html2canvas(element).then((canvas) => {
+        const link = document.createElement("a");
+        link.download = "filename.png";
         link.href = canvas.toDataURL();
         link.click();
       });
-    }
+    },
   },
 };
 </script>

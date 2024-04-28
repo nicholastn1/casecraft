@@ -1,7 +1,8 @@
 <template>
   <div class="sticker-picker">
     <div class="sticker-list">
-      <img style="width: 50px; height: 50px;" v-for="sticker in stickers" :src="sticker.url" :alt="sticker.alt" @click="$emit('stickerSelected', sticker)" />
+      <img style="width: 50px; height: 50px;" v-for="sticker in stickers" :src="sticker.url" :alt="sticker.alt"
+        @click="$emit('stickerSelected', sticker)" />
     </div>
   </div>
 </template>
