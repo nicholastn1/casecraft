@@ -1,31 +1,15 @@
 <template>
-  <div
-    class="text"
-    :id="'text' + index"
-    @mousedown.prevent="moveText"
-    @dblclick="editText"
-    @contextmenu.prevent="showColorPicker"
-    :style="{ fontSize: fontSize + 'px' }"
-  >
+  <div class="text" :id="'text' + index" @mousedown.prevent="moveText" @dblclick="editText"
+    @contextmenu.prevent="showColorPicker" :style="{ fontSize: fontSize + 'px' }">
     <slot></slot>
     <v-menu v-model="showPicker" :close-on-content-click="false" offset-y>
       <v-color-picker v-model="currentColor" @input="changeColor" />
-      <v-slider
-        style="background-color: #1e1e1e"
-        v-model="fontSize"
-        min="10"
-        max="30"
-        step="1"
-      ></v-slider>
+      <v-slider style="background-color: #1e1e1e" v-model="fontSize" min="10" max="30" step="1"></v-slider>
       <template v-slot:activator="{ on }">
         <div v-on="on"></div>
       </template>
       <v-list>
-        <v-list-item
-          v-for="(font, i) in fonts"
-          :key="i"
-          @click="changeFontStyle(font)"
-        >
+        <v-list-item v-for="(font, i) in fonts" :key="i" @click="changeFontStyle(font)">
           <v-list-item-title>{{ font }}</v-list-item-title>
         </v-list-item>
       </v-list>
@@ -42,7 +26,7 @@ export default {
       isEditingText: false,
       originalText: "Write here...",
       rotation: 0,
-      currentColor: "red",
+      currentColor: "white",
       showPicker: false,
       showFontPicker: false,
       fonts: [
@@ -118,13 +102,15 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Spice&family=Fira+Code:wght@300..700&family=Honk&family=Jersey+25&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
 .text {
   position: absolute;
   z-index: 1;
-  color: red;
+  color: white;
   cursor: pointer;
   user-select: none;
 }
+
 .text[contenteditable="true"] {
   border: 1px solid #ccc;
   padding: 5px;

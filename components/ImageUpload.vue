@@ -1,64 +1,29 @@
 <template>
-  <v-card
-    style="width: 413.5px !important; border-radius: 4.3rem"
-    height="859"
-    class="overflow-hidden"
-    @click.stop="selectImage"
-  >
-    <input
-      class="d-none"
-      id="fileInput"
-      type="file"
-      accept="images/*"
-      @input="handleFileUpload"
-    />
+  <v-card style="width: 413.5px !important; border-radius: 4.3rem" height="859" class="overflow-hidden"
+    @click.stop="selectImage">
+    <input class="d-none" id="fileInput" type="file" accept="images/*" @input="handleFileUpload" />
     <v-fade-transition mode="out-in">
-      <v-img
-        v-if="image"
-        :src="image"
-        width="600"
-        height="859"
-        class="phone-case"
-      >
+      <v-img v-if="image" :src="image" width="600" height="859" class="phone-case">
         <v-row class="fill-height" align="end" justify="center">
-          <v-btn
-            class="md-3"
-            fab
-            x-small
-            color="error"
-            @click.stop="deleteImage"
-          >
+          <v-btn class="md-3" fab x-small color="error" @click.stop="deleteImage">
             <v-icon>mdi-delete</v-icon>
           </v-btn>
         </v-row>
       </v-img>
-      <v-row
-        v-else
-        class="d-flex flex-column align-center justify-center fill-height"
-      >
+      <v-row v-else class="d-flex flex-column align-center justify-center fill-height">
         <div style="margin-top: 30px">
-          <svg
-            v-bind:style="{ fill: selectedColor }"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            version="1.1"
-            width="413.5"
-            height="859"
-            viewBox="231.50000385000067 540.8323667636369 827 1718"
-            xml:space="preserve"
-          >
+          <svg v-bind:style="{ fill: selectedColor }" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="413.5" height="859"
+            viewBox="231.50000385000067 540.8323667636369 827 1718" xml:space="preserve">
             <desc>Created with Fabric.js 5.3.0</desc>
             <defs>
               <mask id="phone-case">
-                <rect x="10" y="10" width="100" height="200" fill="white" />
+                <rect x="10" y="10" width="100" height="200" />
               </mask>
             </defs>
-            <g
-              transform="matrix(0.9062731537 0 0 0.9120381271 645.00000385 1399.8323667636)"
-              id="CgKdDBhKIWObllzV0EhE8"
-            >
-              <path
-                style="
+            <g transform="matrix(0.9062731537 0 0 0.9120381271 645.00000385 1399.8323667636)"
+              id="CgKdDBhKIWObllzV0EhE8">
+              <path style="
                   stroke: rgb(145, 20, 6);
                   stroke-width: 0;
                   stroke-dasharray: none;
@@ -68,11 +33,9 @@
                   stroke-miterlimit: 4;
                   fill-rule: nonzero;
                   opacity: 1;
-                "
-                transform=" translate(-456.264205, -941.84659)"
+                " transform=" translate(-456.264205, -941.84659)"
                 d="M 0 147.72877 C 0 66.14041999999999 66.14042 0 147.72877 0 L 764.79964 0 C 846.38799 0 912.5284099999999 66.14042 912.5284099999999 147.72877 L 912.5284099999999 1735.96441 C 912.5284099999999 1817.55276 846.38799 1883.69318 764.79964 1883.69318 L 147.72876999999994 1883.69318 C 66.14041999999993 1883.69318 -5.684341886080802e-14 1817.55276 -5.684341886080802e-14 1735.96441 z M 40.31249 359.23148 C 40.31249 423.95318 92.77978999999999 476.42048 157.50149 476.42048 L 324.686 476.42048 C 389.4077 476.42048 441.875 423.95318 441.875 359.23148000000003 L 441.875 161.16629000000003 C 441.875 96.44459000000003 389.4077 43.97729000000004 324.68600000000004 43.97729000000004 L 157.50149000000005 43.97729000000004 C 92.77979000000005 43.97729000000004 40.312490000000054 96.44459000000003 40.312490000000054 161.16629000000003 z"
-                stroke-linecap="round"
-              />
+                stroke-linecap="round" />
             </g>
           </svg>
         </div>
@@ -92,8 +55,7 @@ export default {
       input: undefined,
       imageFile: undefined,
       image: undefined,
-      mask: false,
-      defaultImage: require("~/assets/images/PhoneCase.svg"),
+      mask: false
     };
   },
   mounted() {
