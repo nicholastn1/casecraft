@@ -44,11 +44,13 @@ export default {
 <style scoped>
 .sticker {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
 }
 
 .sticker img {
   width: 100px;
   height: 100px;
+  cursor: move;
+  user-select: none;
 }
 </style>

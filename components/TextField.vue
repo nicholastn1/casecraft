@@ -105,7 +105,7 @@ export default {
 
 .text {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   color: white;
   cursor: pointer;
   user-select: none;

@@ -10,39 +10,25 @@
           </v-btn>
         </v-row>
       </v-img>
-      <v-row v-else class="d-flex align-center justify-center fill-height transparent">
-        <svg v-bind:style="{ fill: selectedColor }" xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="413.5" height="80vh"
-          viewBox="231.50000385000067 540.8323667636369 827 1718" xml:space="preserve">
-          <desc>Created with Fabric.js 5.3.0</desc>
+      <v-row v-else class="d-flex align-center justify-center fill-height">
+        <svg v-bind:style="{ fill: selectedColor }" class="phone-mask" width="inherit" height="inherit" viewBox="0 0 241 498"
+          fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <mask id="phone-case">
+            <mask>
               <rect x="10" y="10" width="100" height="200" />
             </mask>
           </defs>
-          <g transform="matrix(0.9062731537 0 0 0.9120381271 645.00000385 1399.8323667636)"
-            id="CgKdDBhKIWObllzV0EhE8">
-            <path style="
-                stroke: rgb(145, 20, 6);
-                stroke-width: 0;
-                stroke-dasharray: none;
-                stroke-linecap: butt;
-                stroke-dashoffset: 0;
-                stroke-linejoin: miter;
-                stroke-miterlimit: 4;
-                fill-rule: nonzero;
-                opacity: 1;
-              " transform=" translate(-456.264205, -941.84659)"
-              d="M 0 147.72877 C 0 66.14041999999999 66.14042 0 147.72877 0 L 764.79964 0 C 846.38799 0 912.5284099999999 66.14042 912.5284099999999 147.72877 L 912.5284099999999 1735.96441 C 912.5284099999999 1817.55276 846.38799 1883.69318 764.79964 1883.69318 L 147.72876999999994 1883.69318 C 66.14041999999993 1883.69318 -5.684341886080802e-14 1817.55276 -5.684341886080802e-14 1735.96441 z M 40.31249 359.23148 C 40.31249 423.95318 92.77978999999999 476.42048 157.50149 476.42048 L 324.686 476.42048 C 389.4077 476.42048 441.875 423.95318 441.875 359.23148000000003 L 441.875 161.16629000000003 C 441.875 96.44459000000003 389.4077 43.97729000000004 324.68600000000004 43.97729000000004 L 157.50149000000005 43.97729000000004 C 92.77979000000005 43.97729000000004 40.312490000000054 96.44459000000003 40.312490000000054 161.16629000000003 z"
-              stroke-linecap="round" />
-          </g>
+          <path
+            d="M0.236145 30.8832C0.236145 13.997 13.9272 0.308105 30.8159 0.308105H209.613C226.502 0.308105 240.193 13.997 240.193 30.8832V466.84C240.193 483.726 226.502 497.415 209.613 497.415H30.8159C13.9272 497.415 0.236145 483.726 0.236145 466.84V30.8832ZM6.33857 93.3281C6.33857 110.214 20.0296 123.903 36.9184 123.903H95.7372C112.626 123.903 126.317 110.214 126.317 93.3281V36.3359C126.317 19.4498 112.626 5.76083 95.7372 5.76083H36.9184C20.0296 5.76083 6.33857 19.4498 6.33857 36.3359V93.3281Z" />
         </svg>
+        <img :src="caseMockup" style="position: absolute; width: inherit; height: inherit;" alt="Mockup Case IPhone 13 Pro Max" />
       </v-row>
     </v-fade-transition>
   </v-card>
 </template>
 
 <script>
+import IphoneMockupCase from "~/assets/images/IphoneMockupCase.png";
 export default {
   name: "ImageUpload",
   props: {
@@ -53,7 +39,8 @@ export default {
       input: undefined,
       imageFile: undefined,
       image: undefined,
-      mask: false
+      mask: false,
+      caseMockup: IphoneMockupCase,
     };
   },
   mounted() {
@@ -85,10 +72,37 @@ export default {
 
 <style scoped>
 .phone-case {
-  mask-image: url(../assets/images/PhoneCase.svg);
+  mask-image: url(../assets/images/PhoneCaseMask.svg);
   mask-repeat: no-repeat;
-  width: 413.5px !important;
-  height: 859px !important;
+  width: 24rem;
+  height: 44rem;
   fill: "#{selectedColor}";
+  bottom: 2.58rem !important;
+  position: absolute;
 }
+
+.phone-mask {
+  z-index: 1;
+  width: 21rem;
+  position: absolute;
+  height: 43rem;
+  top: 2.39rem;
+}
+
+@media (max-height: 885px) {
+  .phone-mask {
+    height: 43rem !important;
+    top: 2.32rem !important;
+  }
+}
+
+@media (max-height: 959px) {
+  .phone-mask {
+    width: 25.844rem;
+    height: 46.5rem;
+    top: 2.6rem;
+    left: 0.1rem;
+  }
+}
+
 </style>
