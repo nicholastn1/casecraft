@@ -1,10 +1,16 @@
 <template>
-  <div class="sticker-picker">
-    <div class="sticker-list">
-      <img style="width: 50px; height: 50px;" v-for="sticker in stickers" :src="sticker.url" :alt="sticker.alt"
-        @click="$emit('stickerSelected', sticker)" />
-    </div>
-  </div>
+  <v-card class="rounded-lg">
+    <v-card-text>
+      <div class="text-center mb-3">Choose one or more stickers.</div>
+      <div class="sticker-picker">
+        <div class="sticker-list">
+          <img class="sticker" width="50" height="50" v-for="sticker in stickers" :src="sticker.url" :alt="sticker.alt"
+            @click="$emit('stickerSelected', sticker)" />
+        </div>
+      </div>
+    </v-card-text>
+  </v-card>
+
 </template>
 
 <script>
@@ -46,6 +52,14 @@ export default {
 
 .sticker-list {
   /* Estilos para a lista de stickers */
+}
+
+.sticker {
+  margin: 0 5px
+}
+
+.sticker:hover {
+  transform: scale(1.2);
 }
 
 .selected-sticker {

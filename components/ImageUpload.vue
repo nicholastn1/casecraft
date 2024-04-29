@@ -1,34 +1,51 @@
 <template>
-  <v-card style="width: 93%; background-color: transparent !important; height: 100%; border-radius: 30px;" class="overflow-hidden"
-    @click.stop="selectImage">
+  <div style="width: 413.5px !important; border-radius: 4.3rem" height="859" class="overflow-hidden">
+
     <input class="d-none" id="fileInput" type="file" accept="images/*" @input="handleFileUpload" />
+
     <v-fade-transition mode="out-in">
-      <v-img v-if="image" :src="image" :style="{ maskRepeat: 'no-repeat', height: '100%', width: '63%', maskImage: 'url(' + svgUrl + ')', webkitMaskImage: 'url(' + svgUrl + ')' }">
-        <v-row class="fill-height" align="end" justify="center">
-          <v-btn class="md-3" fab x-small color="error" @click.stop="deleteImage">
-            <v-icon>mdi-delete</v-icon>
-          </v-btn>
-        </v-row>
+
+      <v-img v-if="image" :src="image" width="600" height="859" class="phone-case">
       </v-img>
-      <v-row v-else class="d-flex align-center justify-center fill-height">
-        <svg v-bind:style="{ fill: selectedColor }" class="phone-mask" width="57%" height="90%" viewBox="400"
-          fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <mask>
-              <rect x="10" y="10" width="100" height="200" />
-            </mask>
-          </defs>
-          <path
-            d="M0.236145 30.8832C0.236145 13.997 13.9272 0.308105 30.8159 0.308105H209.613C226.502 0.308105 240.193 13.997 240.193 30.8832V466.84C240.193 483.726 226.502 497.415 209.613 497.415H30.8159C13.9272 497.415 0.236145 483.726 0.236145 466.84V30.8832ZM6.33857 93.3281C6.33857 110.214 20.0296 123.903 36.9184 123.903H95.7372C112.626 123.903 126.317 110.214 126.317 93.3281V36.3359C126.317 19.4498 112.626 5.76083 95.7372 5.76083H36.9184C20.0296 5.76083 6.33857 19.4498 6.33857 36.3359V93.3281Z" />
-        </svg>
-        <img :src="caseMockup" style="position: absolute; width: 70%; height: 100%;" alt="Mockup Case IPhone 13 Pro Max" />
+
+      <v-row v-else class="d-flex flex-column align-center justify-center fill-height">
+        <div style="margin-top: 30px">
+          <svg v-bind:style="{ fill: selectedColor }" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="413.5" height="859"
+            viewBox="231.50000385000067 540.8323667636369 827 1718" xml:space="preserve">
+            <desc>Created with Fabric.js 5.3.0</desc>
+
+            <defs>
+              <mask id="phone-case">
+                <rect x="10" y="10" width="100" height="200" />
+              </mask>
+            </defs>
+
+            <g transform="matrix(0.9062731537 0 0 0.9120381271 645.00000385 1399.8323667636)"
+              id="CgKdDBhKIWObllzV0EhE8">
+              <path style="
+                  stroke: rgb(145, 20, 6);
+                  stroke-width: 0;
+                  stroke-dasharray: none;
+                  stroke-linecap: butt;
+                  stroke-dashoffset: 0;
+                  stroke-linejoin: miter;
+                  stroke-miterlimit: 4;
+                  fill-rule: nonzero;
+                  opacity: 1;
+                " transform=" translate(-456.264205, -941.84659)"
+                d="M 0 147.72877 C 0 66.14041999999999 66.14042 0 147.72877 0 L 764.79964 0 C 846.38799 0 912.5284099999999 66.14042 912.5284099999999 147.72877 L 912.5284099999999 1735.96441 C 912.5284099999999 1817.55276 846.38799 1883.69318 764.79964 1883.69318 L 147.72876999999994 1883.69318 C 66.14041999999993 1883.69318 -5.684341886080802e-14 1817.55276 -5.684341886080802e-14 1735.96441 z M 40.31249 359.23148 C 40.31249 423.95318 92.77978999999999 476.42048 157.50149 476.42048 L 324.686 476.42048 C 389.4077 476.42048 441.875 423.95318 441.875 359.23148000000003 L 441.875 161.16629000000003 C 441.875 96.44459000000003 389.4077 43.97729000000004 324.68600000000004 43.97729000000004 L 157.50149000000005 43.97729000000004 C 92.77979000000005 43.97729000000004 40.312490000000054 96.44459000000003 40.312490000000054 161.16629000000003 z"
+                stroke-linecap="round" />
+            </g>
+          </svg>
+        </div>
       </v-row>
+
     </v-fade-transition>
-  </v-card>
+  </div>
 </template>
 
 <script>
-import IphoneMockupCase from "~/assets/images/IphoneMockupCase.png";
 export default {
   name: "ImageUpload",
   props: {
@@ -39,9 +56,7 @@ export default {
       input: undefined,
       imageFile: undefined,
       image: undefined,
-      mask: false,
-      caseMockup: IphoneMockupCase,
-      svgUrl: require('../assets/images/IPhoneCaseMask.svg')
+      mask: false
     };
   },
   mounted() {
@@ -49,9 +64,7 @@ export default {
   },
   methods: {
     selectImage() {
-      if (!this.imageFile) {
-        this.input.click();
-      }
+      this.input.click();
     },
     handleFileUpload(event) {
       this.imageFile = event.target.files[0];
@@ -68,40 +81,20 @@ export default {
       }
     },
   },
+  watch: {
+    imageFile(value) {
+      this.$emit("onAddImage", value);
+    },
+  }
 };
 </script>
 
 <style scoped>
-.mask {
+.phone-case {
   mask-image: url(../assets/images/PhoneCase.svg);
   mask-repeat: no-repeat;
   width: 413.5px !important;
   height: 859px !important;
+  fill: "#{selectedColor}";
 }
-
-.phone-mask {
-  z-index: 1;
-  /* width: 21rem; */
-  position: absolute;
-  /* height: 43rem; */
-  /* top: 2.39rem; */
-  /* left: 0.9rem; */
-}
-
-/* @media (max-height: 885px) {
-  .phone-mask {
-    height: 43rem !important;
-    top: 2.32rem !important;
-  }
-}
-
-@media (max-height: 959px) {
-  .phone-mask {
-    width: 25.844rem;
-    height: 46.5rem;
-    top: 2.6rem;
-    left: 0.1rem;
-  }
-} */
-
 </style>

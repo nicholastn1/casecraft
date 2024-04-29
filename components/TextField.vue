@@ -1,18 +1,25 @@
 <template>
-  <div class="text" :id="'text' + index" @mousedown.prevent="moveText" @dblclick="editText"
+  <div class="text" :id="'text' + index" @mousedown="moveText" @dblclick="editText"
     @contextmenu.prevent="showColorPicker" :style="{ fontSize: fontSize + 'px' }">
     <slot></slot>
-    <v-menu v-model="showPicker" :close-on-content-click="false" offset-y>
-      <v-color-picker v-model="currentColor" @input="changeColor" />
-      <v-slider style="background-color: #1e1e1e" v-model="fontSize" min="10" max="30" step="1"></v-slider>
+
+    <v-menu v-model="showPicker" :close-on-content-click="false" offset-y min-width="320">
+      <v-color-picker v-model="currentColor" @input="changeColor" style="border-radius: 0;" width="320" hide-canvas hide-inputs/>
+
+      <div class="ml-2">Text size</div>
+      <v-slider v-model="fontSize" min="10" max="30" step="1"></v-slider>
+
       <template v-slot:activator="{ on }">
         <div v-on="on"></div>
       </template>
+
       <v-list>
         <v-list-item v-for="(font, i) in fonts" :key="i" @click="changeFontStyle(font)">
           <v-list-item-title>{{ font }}</v-list-item-title>
         </v-list-item>
       </v-list>
+
+      <v-btn block @click="removeText">Remove</v-btn>
     </v-menu>
   </div>
 </template>
@@ -30,11 +37,8 @@ export default {
       showPicker: false,
       showFontPicker: false,
       fonts: [
-        "Arial",
         "Bungee",
-        "Bungee Spice",
         "Honk",
-        "Shantell Sans",
         "Fira Code",
       ],
       currentFont: "Arial",
@@ -45,16 +49,15 @@ export default {
     moveText(event) {
       let textElement = document.getElementById("text" + this.index);
       if (textElement) {
-        event.stopPropagation();
         const moveListener = function (e) {
           const x = e.clientX;
           const y = e.clientY;
           textElement.style.top = y - 80 + "px";
           textElement.style.left = x - 30 + "px";
         };
-        textElement.addEventListener("mousedown", function (e) {
-          document.addEventListener("mousemove", moveListener);
-        });
+
+        document.addEventListener("mousemove", moveListener);
+
         document.addEventListener("mouseup", function (e) {
           document.removeEventListener("mousemove", moveListener);
         });
@@ -72,6 +75,13 @@ export default {
           this.originalText = textElement.textContent;
           textElement.contentEditable = "false";
         });
+      }
+    },
+    removeText() {
+      const textElement = document.getElementById("text" + this.index);
+      if (textElement) {
+        textElement.remove();
+        this.showPicker = false;
       }
     },
     rotateText(event) {
@@ -105,7 +115,7 @@ export default {
 
 .text {
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   color: white;
   cursor: pointer;
   user-select: none;
@@ -114,5 +124,9 @@ export default {
 .text[contenteditable="true"] {
   border: 1px solid #ccc;
   padding: 5px;
+}
+
+.v-menu__content {
+  background: #1e1e1e;
 }
 </style>

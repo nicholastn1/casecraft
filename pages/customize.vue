@@ -1,22 +1,56 @@
 <template>
-  <v-row class="align-center justify-center" style="height: 87vh;">
-    <v-col class="d-flex flex-column justify-center align-center" sm="3" md="3">
-      <StickerPicker :stickers="stickers" @stickerSelected="addSticker" />
-      <div class="justify-center">
-        <v-color-picker v-model="selectedColor" />
-      </div>
-      <v-btn class="mt-10" @click="addTextField">Add Text</v-btn>
-      <v-btn class="mt-10" @click="downloadElement">Download</v-btn>
+  <v-row align="center">
+    <v-col cols="6" class="d-flex flex-column align-center">
+      <v-row>
+        <v-col cols="12">
+          <StickerPicker :stickers="stickers" @stickerSelected="addSticker" />
+        </v-col>
+      </v-row>
+
+      <v-row>
+        <v-col cols="12">
+          <v-card>
+            <v-card-text>
+              <div class="text-center mb-3">Choose a color.</div>
+              <v-color-picker v-model="selectedColor" />
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+
+      <v-row>
+        <v-col>
+          <v-btn @click="showAddText = true">Add Text</v-btn>
+          <v-btn @click="addImage">Add Image</v-btn>
+          <v-btn v-if="hasImage" color="error darken-1" @click="removeImage">Remove Image</v-btn>
+        </v-col>
+      </v-row>
+
+      <v-row dense>
+        <v-col>
+          <v-btn @click="reset">Reset</v-btn>
+          <v-btn color="success darken-2" @click="downloadElement">Download</v-btn>
+        </v-col>
+      </v-row>
     </v-col>
-    <v-col ref="downloadableElement" class="col-3" style="height: 75%; align-items: center; position: relative; top: 0rem; right: -8rem;" sm="3" md="3">
-      <div v-for="(field, index) in textFields" :key="index">
-        <TextField :index="index">{{ field.text }}</TextField>
+
+    <v-col col="6" class="d-flex flex-column align-center">
+      <div ref="downloadableElement">
+        <div v-if="textFields.length > 0">
+          <div v-for="(field, index) in textFields" :key="index">
+            <TextField :index="index">{{ field.text }}</TextField>
+          </div>
+        </div>
+
+        <div v-for="(sticker, index) in addedStickers" :key="index">
+          <StickerSelected :index="index" :sticker="sticker" @onRemoveSticker="removeSticker" />
+        </div>
+
+        <ImageUpload ref="imageUpload" :selectedColor="selectedColor" @onAddImage="showRemoveImage" />
       </div>
-      <div v-for="(sticker, index) in addedStickers" :key="index">
-        <StickerSelected :index="index" :sticker="sticker" />
-      </div>
-      <ImageUpload v-model="image" :selectedColor="selectedColor" />
     </v-col>
+
+    <AddText v-model="showAddText" @onAddText="addTextField" />
   </v-row>
 </template>
 
@@ -34,6 +68,7 @@ import saturnSticker from "~/assets/images/saturn.png";
 import successSticker from "~/assets/images/success.png";
 import workSticker from "~/assets/images/work.png";
 import html2canvas from "html2canvas";
+import AddText from "~/components/AddText.vue";
 
 export default {
   name: "CustomizePage",
@@ -41,12 +76,13 @@ export default {
     TextField,
     ImageUpload,
     StickerPicker,
+    AddText
   },
   data() {
     return {
-      image: undefined,
+      hasImage: false,
       selectedColor: "#FF0000",
-      textFields: [{ text: "Write here...", color: "white" }],
+      textFields: [],
       stickers: [
         { url: coffeeSticker, alt: "coffee" },
         { url: fireSticker, alt: "fire" },
@@ -58,14 +94,32 @@ export default {
         { url: workSticker, alt: "work" },
       ],
       addedStickers: [],
+      showAddText: false,
     };
   },
   methods: {
-    addTextField() {
-      this.textFields.push({ text: "Write here...", color: "white" });
+    addImage() {
+      this.$refs.imageUpload.selectImage();
+    },
+    showRemoveImage(payload) {
+      this.hasImage = payload;
+    },
+    removeImage() {
+      this.$refs.imageUpload.deleteImage();
+    },
+    addTextField(text) {
+      console.log(text)
+      this.textFields.push({ text: text, color: "white" });
     },
     addSticker(sticker) {
       this.addedStickers.push(sticker);
+    },
+    removeSticker(index) {
+      if (index >= 0 && index < this.addedStickers.length) {
+        this.addedStickers.splice(index, 1);
+      } else {
+        console.error("Índice inválido");
+      }
     },
     downloadElement() {
       const element = this.$refs.downloadableElement; // Make sure to add a ref="downloadableElement" to the v-col
@@ -75,7 +129,13 @@ export default {
         link.href = canvas.toDataURL();
         link.click();
       });
+      this.$toast.success('Arquivo baixado com sucesso!')
     },
+    reset() {
+      this.textFields = []
+      this.addedStickers = []
+      this.$refs.imageUpload.deleteImage();
+    }
   },
 };
 </script>

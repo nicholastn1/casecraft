@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="413.5" height="859" viewBox="231.5 539 827 1718" xml:space="preserve">
+<desc>Created with Fabric.js 5.3.0</desc>
+<defs>
+<mask id="phone-case">
+<rect x="10" y="10" width="100" height="200" fill="white"/>
+</mask>
+</defs>
+<g transform="matrix(0.6426346235 0 0 0.6151334523 645 1398)" id="qDZ9anIaLkEV_M6FB6mcE"  >
+<path style="stroke: rgb(194,182,158); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  transform=" translate(-643.444945, -1396.444945)" d="M 0 231.34107 C 0 103.57493000000001 103.57492 0 231.34107 0 L 1055.54882 0 C 1183.31496 0 1286.88989 103.57492 1286.88989 231.34107 L 1286.88989 2561.54882 C 1286.88989 2689.31496 1183.31497 2792.88989 1055.54882 2792.88989 L 231.34106999999995 2792.88989 C 103.57492999999995 2792.88989 -5.684341886080802e-14 2689.31497 -5.684341886080802e-14 2561.54882 z M 139.1051 507.78076 C 139.1051 567.86987 187.81695 616.58172 247.90606 616.58172 L 543.19679 616.58172 C 603.2859 616.58172 651.99775 567.86987 651.99775 507.78076 L 651.99775 212.49003 C 651.99775 152.40091999999999 603.2859 103.68906999999999 543.19679 103.68906999999999 L 247.90605999999997 103.68906999999999 C 187.81694999999996 103.68906999999999 139.10509999999996 152.40091999999999 139.10509999999996 212.49003 z" stroke-linecap="round" />
+</g>
+</svg>
