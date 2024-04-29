@@ -122,7 +122,7 @@ export default {
       }
     },
     downloadElement() {
-      const element = this.$refs.downloadableElement; // Make sure to add a ref="downloadableElement" to the v-col
+      const element = this.$refs.downloadableElement;
       html2canvas(element).then((canvas) => {
         const link = document.createElement("a");
         link.download = "filename.png";
