@@ -1,6 +1,6 @@
 <template>
   <v-row class="align-center justify-center" style="height: 87vh;">
-    <v-col class="d-flex flex-column justify-center align-center" cols="12" sm="8" md="4">
+    <v-col class="d-flex flex-column justify-center align-center" sm="3" md="3">
       <StickerPicker :stickers="stickers" @stickerSelected="addSticker" />
       <div class="justify-center">
         <v-color-picker v-model="selectedColor" />
@@ -8,7 +8,7 @@
       <v-btn class="mt-10" @click="addTextField">Add Text</v-btn>
       <v-btn class="mt-10" @click="downloadElement">Download</v-btn>
     </v-col>
-    <v-col ref="downloadableElement" class="d-flex justify-center" style="height: inherit;" cols="12" sm="8" md="5">
+    <v-col ref="downloadableElement" class="col-3" style="height: 75%; align-items: center; position: relative; top: 0rem; right: -8rem;" sm="3" md="3">
       <div v-for="(field, index) in textFields" :key="index">
         <TextField :index="index">{{ field.text }}</TextField>
       </div>
