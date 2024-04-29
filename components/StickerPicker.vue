@@ -1,7 +1,8 @@
 <template>
   <v-card class="rounded-lg">
     <v-card-text>
-      <div class="text-center mb-3">Choose one or more stickers.</div>
+      <div class="text-center">Choose one or more stickers.</div>
+      <div class="text-center caption font-body-2 mb-2">(Resize: Right click, Rotate: Mouse scroll)</div>
       <div class="sticker-picker">
         <div class="sticker-list">
           <img class="sticker" width="50" height="50" v-for="sticker in stickers" :src="sticker.url" :alt="sticker.alt"
